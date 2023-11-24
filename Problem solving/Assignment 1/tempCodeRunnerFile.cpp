@@ -1,4 +1,2 @@
-    for (int i = 0; i < n; i++)
-    {
-        cout << v[i] << " ";
-    }
+            v.push_back(ar[i]);
+            v.push_back(arr[i]);
