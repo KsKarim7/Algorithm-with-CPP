@@ -22,7 +22,7 @@ int main()
     }
     for (int i = 1; i <= n; i++)
     {
-        cout << "List " << i << ": ";
+        cout << "List " << i << " : ";
         for (int j : adj[i])
         {
             cout << j << " ";
