@@ -4,18 +4,19 @@ using namespace std;
 int const N = 1e3 + 5;
 vector<int> adj[N];
 bool visited[N];
-vector<int> v;
 
-void dfs(int u)
+void dfs(int u, int &num)
 {
+    num++;
     for (int v : adj[u])
     {
         visited[u] = true;
+
         if (visited[v])
         {
             continue;
         }
-        dfs(v);
+        dfs(v, num);
     }
 }
 
@@ -65,26 +66,23 @@ int main()
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-    // int conComp = 0;
-    // // int num = 0;
-    // for (int i = 1; i <= n; i++)
-    // {
-
-    //     if (visited[i])
-    //     {
-    //         // num++;
-    //         continue;
-    //     }
-    //     dfs(arr[i]);
-    //     conComp++;
-    //     // v.push_back(num);
-    //     // num = 0;
-    // }
-    // cout << conComp << endl;
-    // // cout << v[0] << endl;
+    int conComp = 0;
+    vector<int> vec;
     for (int i = 1; i <= n; i++)
     {
-        cout << arr[i] << endl;
+        int num = 0;
+        if (visited[arr[i]])
+        {
+            // num++;
+            continue;
+        }
+        dfs(arr[i], num);
+        vec.push_back(num);
+        conComp++;
+        // num = 0;
     }
+    sort(vec.begin(), vec.end());
+    for (auto x : vec)
+        cout << x << " ";
     return 0;
 }
