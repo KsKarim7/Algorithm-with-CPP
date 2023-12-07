@@ -39,7 +39,7 @@ int main()
     int k;
     cin >> k;
     int count = 0;
-    dfs(1, k, count);
+    dfs(k, k, count);
     cout << count;
     return 0;
 }

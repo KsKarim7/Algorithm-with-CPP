@@ -15,24 +15,16 @@ void bfs(int s)
 
     while (!q.empty())
     {
-        // pop a node from the queue and insert unvisited neighbour of that node
         int u = q.front();
         q.pop();
-        // cout << "visiting node: " << u << endl;
-
-        // section 1: A node is being processed;
         for (int v : adj[u])
         {
-            // section 2: before pushing the childs of the node
             if (visited[v] == false)
             {
                 q.push(v);
                 visited[v] = true;
                 level[v] = level[u] + 1;
-
-                // section 3: after pushing the childs of the node
             }
-            // section 4: similar to section 1
         }
     }
 }
@@ -54,12 +46,14 @@ int main()
     {
         int x, y;
         cin >> x >> y;
-        // cout << x << " " << y << endl;
+        for (int i = 0; i < N; i++)
+        {
+            visited[i] = false;
+            level[i] = -1;
+        }
         bfs(x);
 
-        cout << x << " " << y << " " << level[y] << endl;
+        cout << level[y] << endl;
     }
-    // bfs(1);
-    // cout << "Level of " << 4 << ": " << level[4] << endl;
     return 0;
 }

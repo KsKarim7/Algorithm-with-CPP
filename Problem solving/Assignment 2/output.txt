@@ -1,5 +1,5 @@
-Visiting node: 1
-Visiting node: 0
-Visiting node: 2
-Visiting node: 3
-2
+999
+1000
+100
+500
+600
