@@ -1,16 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int const N = 1e3 + 5;
+int const N = 1e5 + 5;
 vector<int> adj[N];
 bool visited[N];
 
 void dfs(int u, int &num)
 {
     num++;
+    visited[u] = true;
     for (int v : adj[u])
     {
-        visited[u] = true;
 
         if (visited[v])
         {
