@@ -2,76 +2,64 @@
 using namespace std;
 
 const int N = 1e5 + 5;
-// vector<int> adj[N];
-
-// for weighted list
 vector<int> adj[N];
 bool visited[N];
-int depth[N];
-int height[N];
+int level[N];
+vector<int> ans;
 
-void dfs(int u)
+void bfs(int s, int c)
 {
-    // section 1
-    // actions just after entering a node u
-    visited[u] = true;
-    // cout << "Visiting node: " << u << endl;
-    for (int v : adj[u])
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    level[s] = 0;
+    while (!q.empty())
     {
-        // section 2
-        // actions before entering a new neighbour
-        if (visited[v] == true)
+        int u = q.front();
+        q.pop();
+        if (level[u] == c)
         {
-            continue;
+            ans.push_back(u);
         }
-        depth[v] = depth[u] + 1;
-        dfs(v);
-        // now we can determine the height of u after calculating v
-        // if (height[v] + 1 > height[u])
-        // {
-        //     height[u] = height[v] + 1;
-        // }
-        height[u] = max(height[u], height[v] + 1);
+        for (int v : adj[u])
+        {
+            if (visited[v] == false)
+            {
+                q.push(v);
+                visited[v] = true;
+                level[v] = level[u] + 1;
+            }
+        }
     }
 }
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    for (int i = 0; i < m; i++)
+    int m, n, c;
+    cin >> m >> n;
+    for (int i = 0; i < n; i++)
     {
-        // for weighted list
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-    int l;
-    cin >> l;
-    stack<int> st;
+    cin >> c;
+    bfs(0, c);
 
-    dfs(1);
-    for (int i = 1; i <= n; i++)
+    // cout << "Level of " << c << " : " << level[c];
+    if (ans.size() == 0)
     {
-        if (depth[l])
+        cout << -1 << endl;
+    }
+    else
+    {
+        sort(ans.begin(), ans.end());
+        for (auto x : ans)
         {
-            st.push(depth[l]);
+            cout << x << " ";
         }
     }
-    while (!st.empty())
-    {
-        cout << st.top() << " ";
-        st.pop();
-    }
-    // for (int i = 1; i <= n; i++)
-    // {
-    //     cout << "Depth of Node " << i << ": " << depth[i] << endl;
-    // }
-    // cout << "******************************" << endl;
-    for (int i = 1; i <= n; i++)
-    {
-        cout << "height of Node " << i << ": " << height[i] << endl;
-    }
+
     return 0;
 }
