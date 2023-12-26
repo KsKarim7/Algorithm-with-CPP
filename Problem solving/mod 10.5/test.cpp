@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef pair<int, int> pii;
+typedef pair<int, int> pr;
 
 const int N = 1e3 + 10;
 vector<string> g;
-bool visited[N][N];
+int visited[N][N];
 int level[N][N];
-vector<pii> direc = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+pr parent[N][N];
+vector<pr> direc = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
 int n, m;
 
 bool isValid(int i, int j)
@@ -16,17 +17,17 @@ bool isValid(int i, int j)
 
 void bfs(int si, int sj)
 {
-    queue<pii> q;
+    queue<pr> q;
     q.push({si, sj});
     visited[si][sj] = true;
     level[si][sj] = 0;
-
     while (!q.empty())
     {
-        pii upair = q.front();
+        pr upair = q.front();
         int i = upair.first;
         int j = upair.second;
         q.pop();
+
         for (auto d : direc)
         {
             int ni = i + d.first;
@@ -37,6 +38,7 @@ void bfs(int si, int sj)
                 q.push({ni, nj});
                 visited[ni][nj] = true;
                 level[ni][nj] = level[i][j] + 1;
+                parent[ni][nj] = {i, j};
             }
         }
     }
@@ -44,6 +46,7 @@ void bfs(int si, int sj)
 
 int main()
 {
+    // int n, m;
     int si, sj, di, dj;
     cin >> n >> m;
     for (int i = 0; i < n; i++)
@@ -66,11 +69,49 @@ int main()
     bfs(si, sj);
     if (level[di][dj] != 0)
     {
-        cout << level[di][dj];
+        cout << "YES\n";
+        cout << level[di][dj] << endl;
     }
     else
     {
-        cout << "-1";
+        cout << "NO\n";
     }
+
+    vector<pr> path;
+    pr current = {di, dj};
+    while (!(current.first == si && current.second == sj))
+    {
+        path.push_back(current);
+        current = parent[current.first][current.second];
+    }
+    path.push_back({si, sj});
+    reverse(path.begin(), path.end());
+    for (int i = 1; i < path.size(); i++)
+    {
+        // path[i-1] ->path[i]
+        if (path[i - 1].first == path[i].first)
+        {
+            if (path[i - 1].second == path[i].second - 1)
+            {
+                cout << "R";
+            }
+            else
+            {
+                cout << "L";
+            }
+        }
+        else
+        {
+            if (path[i - 1].first == path[i].first - 1)
+            {
+                cout << "D";
+            }
+            else
+            {
+                cout << "U";
+            }
+        }
+    }
+
     return 0;
 }
