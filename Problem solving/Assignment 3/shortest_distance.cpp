@@ -4,7 +4,7 @@ using namespace std;
 
 const int N = 1e5 + 5;
 vector<pi> v[N];
-// bool vis[N];
+bool vis[N];
 
 class Edge
 {
@@ -27,7 +27,7 @@ public:
     }
 };
 
-void prims(int s, int d, bool vis[])
+void prims(int s, int d)
 {
     priority_queue<Edge, vector<Edge>, compare> pq;
     vector<Edge> EdgeLst;
@@ -65,9 +65,9 @@ void prims(int s, int d, bool vis[])
 
 int main()
 {
-    bool vis[N];
     int n, m, e;
     cin >> n >> e;
+    // bool vis[N];
     while (e--)
     {
         int a, b, w;
@@ -78,13 +78,16 @@ int main()
     // prims(4, 2);
     cin >> m;
     // cout << m;
-    // while (m--)
-    // {
-    //     int s, d;
-    //     cin >> s >> d;
-    //     prims(s, d);
-    // }
-    prims(1, 2, vis);
-    prims(4, 2, vis);
+    while (m--)
+    {
+        int s, d;
+        cin >> s >> d;
+        for (int i = 0; i < N; i++)
+        {
+            vis[i] = false;
+        }
+        prims(s, d);
+    }
+
     return 0;
 }
