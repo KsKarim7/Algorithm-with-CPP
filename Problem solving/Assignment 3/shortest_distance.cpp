@@ -1,92 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define pi pair<int, int>
-
-const int N = 1e5 + 5;
-vector<pi> v[N];
-bool vis[N];
-
-class Edge
-{
-public:
-    int a, b, w;
-    Edge(int a, int b, int w)
-    {
-        this->a = a;
-        this->b = b;
-        this->w = w;
-    }
-};
-
-class compare
-{
-public:
-    bool operator()(Edge a, Edge b)
-    {
-        return a.w > b.w;
-    }
-};
-
-void prims(int s, int d)
-{
-    priority_queue<Edge, vector<Edge>, compare> pq;
-    vector<Edge> EdgeLst;
-    pq.push(Edge(s, s, 0));
-    int cost = 0;
-    while (!pq.empty())
-    {
-        Edge parent = pq.top();
-        pq.pop();
-        int a = parent.a;
-        int b = parent.b;
-        int w = parent.w;
-        cost += w;
-        if (b == d)
-        {
-            cout << cost << endl;
-            break;
-        }
-        if (vis[b])
-        {
-            continue;
-        }
-        vis[b] = true;
-        EdgeLst.push_back(parent);
-        for (int i = 0; i < v[b].size(); i++)
-        {
-            pi child = v[b][i];
-            if (!vis[child.first])
-            {
-                pq.push(Edge(b, child.first, child.second));
-            }
-        }
-    }
-}
+const long long INF = 1e18;
 
 int main()
 {
-    int n, m, e;
+    // your code goes here
+    int n, e;
     cin >> n >> e;
-    // bool vis[N];
+    long long dis[n + 1][n + 1];
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (i == j)
+            {
+                dis[i][j] = 0;
+                continue;
+            }
+            dis[i][j] = INF;
+        }
+    }
     while (e--)
     {
-        int a, b, w;
+        int a, b;
+        long long w;
         cin >> a >> b >> w;
-        v[a].push_back({b, w});
-        // v[b].push_back({a, w});
+        dis[a][b] = w;
     }
-    // prims(4, 2);
-    cin >> m;
-    // cout << m;
-    while (m--)
+
+    for (int k = 1; k <= n; k++)
     {
-        int s, d;
-        cin >> s >> d;
-        for (int i = 0; i < N; i++)
+        for (int i = 1; i <= n; i++)
         {
-            vis[i] = false;
+            for (int j = 1; j <= n; j++)
+            {
+                if (dis[i][k] + dis[k][j] < dis[i][j])
+                {
+                    dis[i][j] = dis[i][k] + dis[k][j];
+                }
+            }
         }
-        prims(s, d);
+    }
+    int q;
+    cin >> q;
+    for (int i = 0; i < q; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        if (dis[x][y] == INF)
+        {
+            cout << -1 << endl;
+        }
+        else
+        {
+            cout << dis[x][y] << endl;
+        }
     }
 
     return 0;

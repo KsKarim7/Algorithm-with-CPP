@@ -74,7 +74,7 @@ int main()
         v.push_back(Edge(a, b, w));
     }
     sort(v.begin(), v.end(), compare);
-    int cost = 0;
+    long long cost = 0;
     for (Edge val : v)
     {
         int a = val.a;
