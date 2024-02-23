@@ -11,9 +11,7 @@ bool ifReach(long long int val, long long int n)
     {
         return false;
     }
-    long long int newVal1 = val * 10;
-    long long int newVal2 = val * 20;
-    return ifReach(newVal1, n) || ifReach(newVal2, n);
+    return ifReach(val * 10, n) || ifReach(val * 20, n);
 }
 
 int main()
