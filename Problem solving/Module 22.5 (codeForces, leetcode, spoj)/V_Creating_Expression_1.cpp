@@ -34,7 +34,7 @@ int main()
     }
     else
     {
-        cout << sum;
+        // cout << sum;
         cout << "NO" << endl;
     }
     return 0;
