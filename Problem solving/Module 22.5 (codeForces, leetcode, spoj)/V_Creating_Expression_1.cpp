@@ -1,22 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int createExp(int arr[], int n, int x, const int &sum)
+int createExp(int arr[], int n, int x, int *sum)
 {
-    if (n == 0 || sum == x)
+    if (n == 0 || *sum == x)
     {
-        // cout << sum << endl;
-        return 0;
+        // cout << *sum << endl;
+        return *sum;
     }
-    if (arr[n - 1] <= x && arr[n - 1] >= 0)
-    {
-        return createExp(arr, n - 1, x, sum + arr[n - 1]);
-        return createExp(arr, n - 1, x, sum - arr[n - 1]);
-    }
-    else
-    {
-        return createExp(arr, n - 1, x, sum);
-    }
+    // if (arr[n - 1] >= 0)
+    // {
+    return createExp(arr, n - 1, x, sum + arr[n - 1]);
+    return createExp(arr, n - 1, x, sum - arr[n - 1]);
+    // }
+    // else
+    // {
+    //     return createExp(arr, n - 1, x, sum);
+    // }
 }
 
 int main()
@@ -28,14 +28,17 @@ int main()
     {
         cin >> arr[i];
     }
-    if (createExp(arr, n, x, sum) == x)
+    // cout << createExp(arr, n, x, &sum);
+    // cout << s;
+    // cout << createExp(arr, n, x, &sum);
+    if (createExp(arr, n, x, &sum) == x)
     {
-        cout << "YES" << endl;
+        // cout << sum;
+        cout << "YES";
     }
     else
     {
-        // cout << sum;
-        cout << "NO" << endl;
+        cout << "NO";
     }
     return 0;
 }
