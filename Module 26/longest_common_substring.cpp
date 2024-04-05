@@ -46,6 +46,7 @@ int main()
             }
         }
     }
+    cout << maxx;
     string ans;
     while (ci != 0 && cj != 0)
     {

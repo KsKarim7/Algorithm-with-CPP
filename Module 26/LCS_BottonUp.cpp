@@ -4,6 +4,7 @@ int main()
 {
     string a, b;
     cin >> a >> b;
+
     int n = a.size(), m = b.size();
     int dp[n + 1][m + 1];
 

@@ -18,7 +18,7 @@ void bfs(int s)
         // pop a node from the queue and insert unvisited neighbour of that node
         int u = q.front();
         q.pop();
-        // cout << "visiting node: " << u << endl;
+        cout << "visiting node: " << u << endl;
 
         // section 1: A node is being processed;
         for (int v : adj[u])
@@ -46,9 +46,9 @@ int main()
         int u, v;
         cin >> u >> v;
         adj[u].push_back(v);
-        adj[v].push_back(v);
+        adj[v].push_back(u);
     }
-    bfs(1);
+    bfs(0);
     for (int i = 1; i <= n; i++)
     {
         cout << "Level of " << i << ": " << level[i] << endl;

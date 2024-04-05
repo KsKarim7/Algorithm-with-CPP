@@ -33,11 +33,9 @@ void dfs(int u)
         // }
         height[u] = max(height[u], height[v] + 1);
 
-        // section 3
-        // actions after exiting a neighbour
+     
     }
-    // section 4
-    // actions before exiting a node u
+
 }
 
 int main()

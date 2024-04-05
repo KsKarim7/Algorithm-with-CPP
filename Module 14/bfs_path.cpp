@@ -62,6 +62,8 @@ int main()
             x = parent[x];
         }
         reverse(path.begin(), path.end());
+        cout << endl
+             << "Shortest path to reach " << d << ": ";
         for (int val : path)
         {
             cout << val << " ";

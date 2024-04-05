@@ -1,1 +1,1 @@
-Cycle Detected!
+Level of 0: 0

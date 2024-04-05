@@ -19,7 +19,7 @@ void dijkstra(int s)
             pair<int, int> child = v[parent][i];
             int childNode = child.first;
             int childCost = child.second;
-            if (dis[parent] + +childCost < dis[childNode])
+            if (dis[parent] + childCost < dis[childNode])
             {
                 dis[childNode] = dis[parent] + childCost;
                 q.push(childNode);

@@ -3,4 +3,5 @@ Node 2: 1
 Node 3: 1
 Node 4: 3
 Node 5: 2
-1 2 5 
+
+Shortest path to reach 5: 1 2 5 
