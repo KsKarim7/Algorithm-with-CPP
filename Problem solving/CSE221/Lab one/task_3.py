@@ -1,56 +1,50 @@
-n = int(input())
-# id = []
-# mark = []
-# print(n)
-ID = input().split(" ")
-mark = input().split(" ")
-
-res = []
-
-# for i in range(1,n):
-#     j = i-1
-#     x = id[i]
-#     y = mark[i]
-#     while(j>-1 and id[j]>x)
-
-# for i in range(n):
-#     res.append([int(ID[i]),int(mark[i])])
-
-# for i in range(1,n):
-#     j = i-1
-#     x = res[i]
-
-        
-#     while(j>-1 and res[j][1] < x[1]):
-#         res[j+1] = res[j]
-#         j-=1;
-#     res[j+1] = x
-# print(res)
+def bubbleSort(arr):                                                    
+    for i in range(len(arr)-1):
+        for j in range(len(arr)-i-1): 
+            if arr[j][1] < arr[j+1][1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+            if arr[j][1] == arr[j+1][1]:
+                if arr[j][0] > arr[j+1][0]:
+                    arr[j], arr[j+1] = arr[j+1], arr[j]
+            
+    
+    return arr
 
 
-for i in range(1,n):
-    j = i-1
-    x = mark[i]
-    y = ID[i]
-
-        
-    while(j>-1 and mark[j] < x):
-        mark[j+1] = mark[j]
-        ID[j+1] = ID[j]
-        j-=1;
-    mark[j+1] = x
-    ID[j+1] = y
-for i in range(1,n):
-    j = i-1
-    x = ID[i]
-    y = mark[i]
-
-        
-    while(j>-1 and ID[j] < x):
-        ID[j+1] = ID[j]
-        mark[j+1] = mark[j]
-        j-=1;
-    ID[j+1] = x
-    mark[j+1] = y
-
-
+def ranking():
+    with open ("output3.txt", "w") as f2:
+        f2.write("")
+    with open("input3.txt", "r") as f1:
+        num_inputs = 0
+        id_arr = None
+        mark_arr = None
+        id_no = False
+        mark = False
+        idx = 0
+        for line in f1:
+            if len(line.strip()) == 1:
+                num_inputs = int(line.strip())
+                id_arr = [0] * num_inputs
+                mark_arr = [0] * num_inputs
+                continue
+            if id_no == False:
+                for item in line.strip().split():
+                    id_arr[idx] = int(item)
+                    idx += 1
+                idx = 0
+                id_no = True
+                continue
+            if mark == False:
+                for item in line.strip().split():
+                    mark_arr[idx] = int(item)
+                    idx += 1
+                idx = 0
+                mark = True
+                id_mark_arr = [item for item in zip(id_arr, mark_arr)]
+                with open ("output3.txt", "a") as f2:
+                    for iden, markk in bubbleSort(id_mark_arr):
+                        f2.write(f"ID: {iden} Mark: {markk}\n")
+                    f2.write("\n")
+                id_no = False
+                mark = False
+                

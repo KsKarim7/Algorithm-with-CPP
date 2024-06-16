@@ -25,13 +25,7 @@
 #         lst.clear()
 #     cc+=1
 
-with open("input.txt", "r") as f:
-    N = int(f.readline())
-    student_ids = list(map(int, f.readline().split()))
-    marks = list(map(int, f.readline().split()))
-
-students = sorted(zip(student_ids, marks), key=lambda x: (-x[1], x[0]))
-
-with open("output.txt", "w") as f:
-    for student_id, mark in students:
-        f.write(f"ID: {student_id} Mark: {mark}\n")
+s = "My name is Khan"
+ss = s.strip()
+# print(s)
+print(ss)
