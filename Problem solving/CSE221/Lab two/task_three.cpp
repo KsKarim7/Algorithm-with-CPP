@@ -14,13 +14,13 @@ void merge(int l, int r, int mid)
     vector<pair<int, int>> L;
     vector<pair<int, int>> R;
 
-    for (int i = l, j = 0; i <= mid; i++, j++)
+    for (int i = l; i <= mid; i++)
     {
         // L[j] = vec[i];
         L.push_back(vec[i]);
     }
 
-    for (int i = mid + 1, j = 0; i <= r; i++, j++)
+    for (int i = mid + 1; i <= r; i++)
     {
         R.push_back(vec[i]);
         // R[j] = vec[i];

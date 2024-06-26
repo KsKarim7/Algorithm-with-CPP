@@ -1,77 +1,74 @@
-// #include <iostream>
-// #include <vector>
-// #include <algorithm>
-
-// using namespace std;
-
-// struct Task
-// {
-//     int start, end;
-// };
-
-// bool compareTasks(Task a, Task b)
-// {
-//     return a.end < b.end;
-// }
-
-// int maxTasks(vector<Task> &tasks, int M)
-// {
-//     sort(tasks.begin(), tasks.end(), compareTasks);
-
-//     int result = 0;
-//     int endTime = 0;
-
-//     for (int i = 0; i < tasks.size(); i++)
-//     {
-//         if (tasks[i].start >= endTime)
-//         {
-//             result++;
-//             endTime = tasks[i].end;
-//         }
-//     }
-
-//     return min(result, M);
-// }
-
-// int main()
-// {
-//     int N, M;
-//     cin >> N >> M;
-
-//     vector<Task> tasks(N);
-
-//     for (int i = 0; i < N; i++)
-//     {
-//         cin >> tasks[i].start >> tasks[i].end;
-//     }
-//     // for (int i = 0; i < 5; i++)
-//     // {
-//     //     cout << tasks[i].start << " " << tasks[i].end << endl;
-//     // }
-//     // cout << endl;
-
-//     cout << maxTasks(tasks, M) << endl;
-
-//     return 0;
-// }
-
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Task
+vector<pair<int, int>> vec;
+
+void merge(int l, int r, int mid)
 {
-    int start, end;
-};
+    int left_size = mid - l + 1;
+    int right_size = r - mid + 1;
+
+    vector<pair<int, int>> L;
+    vector<pair<int, int>> R;
+
+    for (int i = l; i <= mid; i++)
+    {
+        L.push_back(vec[i]);
+    }
+    for (int i = mid + 1; i <= r; i++)
+    {
+        R.push_back(vec[i]);
+    }
+    L.push_back({INT_MAX, 0});
+    R.push_back({INT_MAX, 0});
+
+    int lp = 0, rp = 0;
+    for (int i = l; i <= r; i++)
+    {
+        if (L[lp].first <= R[rp].first)
+        {
+            vec[i] = L[lp];
+            lp++;
+        }
+        else
+        {
+            vec[i] = R[rp];
+            rp++;
+        }
+    }
+}
+
+void mergeSort(int l, int r)
+{
+    if (l == r)
+    {
+        return;
+    }
+    int mid = (l + r) / 2;
+    mergeSort(l, mid);
+    mergeSort(mid + 1, r);
+    merge(l, r, mid);
+}
+
 int main()
 {
     int n, m;
-    scanf("%d%d", &n, &m);
-    vector<Task> tasks(n);
-
+    cin >> n >> m;
     for (int i = 0; i < n; i++)
     {
-        cin >> tasks[i].start >> tasks[i].end;
+        int a, b;
+        cin >> a >> b;
+        vec.push_back({a, b});
     }
-    vector<Task> myTasks;
+    mergeSort(0, n - 1);
+    for (auto pair : vec)
+    {
+        printf("%d %d\n", pair.first, pair.second);
+    }
+    int count = 0;
+    if (vec.size() > m)
+    {
+        count += m;
+    }
     return 0;
 }
