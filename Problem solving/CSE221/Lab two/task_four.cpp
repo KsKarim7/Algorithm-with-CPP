@@ -19,13 +19,13 @@ void merge(int l, int r, int mid)
     {
         R.push_back(vec[i]);
     }
-    L.push_back({INT_MAX, 0});
-    R.push_back({INT_MAX, 0});
+    L.push_back({0, INT_MAX});
+    R.push_back({0, INT_MAX});
 
     int lp = 0, rp = 0;
     for (int i = l; i <= r; i++)
     {
-        if (L[lp].first <= R[rp].first)
+        if (L[lp].second <= R[rp].second)
         {
             vec[i] = L[lp];
             lp++;
@@ -54,6 +54,10 @@ int main()
 {
     int n, m;
     cin >> n >> m;
+    // int arr[m] = {[0 ... (m - 1)] = 0};
+    int arr[m];
+    fill_n(arr, m, 0);
+
     for (int i = 0; i < n; i++)
     {
         int a, b;
@@ -61,14 +65,23 @@ int main()
         vec.push_back({a, b});
     }
     mergeSort(0, n - 1);
+
+    int work = 0;
+    bool flag = true;
     for (auto pair : vec)
     {
-        printf("%d %d\n", pair.first, pair.second);
+        for (int i = 0; i < m; i++)
+        {
+            if (pair.first >= arr[i] && flag == true)
+            {
+                arr[i] = pair.second;
+                flag = false;
+                work++;
+            }
+        }
+        flag = true;
     }
-    int count = 0;
-    if (vec.size() > m)
-    {
-        count += m;
-    }
+    cout << work << endl;
+
     return 0;
 }
