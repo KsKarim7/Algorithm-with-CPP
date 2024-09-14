@@ -12,7 +12,7 @@ int findIndex(int arr[], int n)
 
         if (arr[mid] > arr[mid + 1])
         {
-            return mid;
+            return mid + 1;
         }
         else if (arr[low] <= arr[mid])
         {
@@ -37,7 +37,7 @@ int main()
         cin >> arr[i];
     }
 
-    cout << findIndex(arr, n) + 1 << endl;
+    cout << findIndex(arr, n) << endl;
     return 0;
 }
 // a)The algorithm to find the index i is based on the fact that the array is divided into two parts: the first part is in increasing order, and the second part is also in increasing order. We can use a binary search approach to find the index i.

@@ -14,7 +14,7 @@ void bfs(int s)
     q.push(s);
     visited[s] = true;
     level[s] = 0;
-    parent[s] = -1;
+    parent[s] = -1; // 1
 
     while (!q.empty())
     {
@@ -27,7 +27,7 @@ void bfs(int s)
                 q.push(v);
                 visited[v] = true;
                 level[v] = level[u] + 1;
-                parent[v] = u;
+                parent[v] = u; // 1
             }
         }
     }

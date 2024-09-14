@@ -9,7 +9,7 @@ void merge(int l, int r, int mid)
     int left_size = mid - l + 1;
     int L[left_size + 1];
 
-    int right_size = r - (mid + 1) + 1;
+    int right_size = r - (mid + 1) - 1;
     int R[right_size + 1];
 
     for (int i = l, j = 0; i <= mid; i++, j++)
