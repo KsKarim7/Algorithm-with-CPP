@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const int INF = numeric_limits<int>::max();
+const int INF = 1e9 + 10;
 
 struct Edge
 {
